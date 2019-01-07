@@ -1,11 +1,12 @@
-FROM golang:1.6
+FROM golang:1.11.1-alpine3.8
+WORKDIR /go/src/github.com/dinhvandung7541/vote-now
+ADD . /go/src/github.com/dinhvandung7541/vote-now
+RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -a -installsuffix cgo -o vote-now ./ext/cmd/vote-now
 
-# Install beego and the bee dev tool
-# RUN go get github.com/astaxie/beego && go get github.com/beego/bee
+FROM alpine:3.8
+WORKDIR /
+RUN apk add --no-cache ca-certificates
 
-# Expose the application on port 8080
-EXPOSE 8080
+COPY --from=0 /go/src/github.com/dinhvandung7541/vote-now/vote-now /vote-now
 
-# Set the entry point of the container to the bee command that runs the
-# application and watches for changes
-CMD ["run"]
+CMD ["/vote-now"]
