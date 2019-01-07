@@ -2,8 +2,8 @@
 # run:
 # 	go run cmd/server/main.go
 build: local-env 
-	eval "docker-compose -f docker-compose.yml down"
-	eval "docker-compose -f docker-compose.yml up -d"
+	eval "docker-compose -f docker-compose.yaml down"
+	eval "docker-compose -f docker-compose.yaml up -d"
 
 local-env: local-db
 	@cat .env_migrator.yaml.example > .env_migrator.yaml
