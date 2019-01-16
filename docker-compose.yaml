@@ -1,17 +1,24 @@
 version: '3'
 services:
   vote-now:
-    build: .
+    image: dinhvandung7541/vote-now:latest
+    depends_on: 
+      - postgres
     ports:
-     - "5000:5000"
+     - "8080:8080"
 
   postgres:
-    image: postgres:10.4
+    image: postgres:latest
     restart: always
     container_name: vote-now_db_1
     environment:
       POSTGRES_PASSWORD: example
-      POSTGRES_DB: vote-now-db
-
+      POSTGRES_DB: vote-now
+      
     ports:
       - 5432:5432
+
+# networks:
+#   default:
+#     external:
+#       name: nginx-proxy

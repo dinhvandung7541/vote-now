@@ -12,7 +12,7 @@ import (
 func main() {
     // initDb()
     // defer db.Close()
-
+    fmt.Println("hello Docker")
     http.HandleFunc("/", helloWorld)
     http.ListenAndServe(":8080", nil)
 }
@@ -20,4 +20,3 @@ func main() {
 func helloWorld(w http.ResponseWriter, r *http.Request) {
     fmt.Fprintf(w, "Hello world!")
 }
-

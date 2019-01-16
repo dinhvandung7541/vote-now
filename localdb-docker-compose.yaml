@@ -1,7 +1,6 @@
 version: '3.1'
 
 services:
-
   db:
     image: postgres:10.4
     restart: always
@@ -9,24 +8,5 @@ services:
     environment:
       POSTGRES_PASSWORD: example
       POSTGRES_DB: vote-now
-
     ports:
       - 5432:5432
-
-  db-test:
-    image: postgres:10.4
-    restart: always
-    container_name: vote-now-db-1-test
-    environment:
-      POSTGRES_PASSWORD: example
-      POSTGRES_DB: test
-
-    ports:
-      - 5439:5432
-
-  adminer:
-    image: adminer
-    restart: always
-    container_name: vote-now-db-1-adminer
-    ports:
-      - 8080:8080
