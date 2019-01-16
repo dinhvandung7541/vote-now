@@ -9,10 +9,10 @@ import (
 	"github.com/pressly/goose"
 
 	// Init DB drivers.
-	"git.dwarvesf.com/llra/backend/ext/cmd/migrator/config"
-	dbconn "git.dwarvesf.com/llra/backend/ext/cmd/migrator/db"
+	"github.com/dinhvandung7541/vote-now/cmd/migrator/config"
+	dbconn "github.com/dinhvandung7541/vote-now/cmd/migrator/db"
 )
-
+//go build -o bin/migrator ./ext/cmd/migrator
 var (
 	flags = flag.NewFlagSet("migrator", flag.ExitOnError)
 	dir   = flags.String("dir", "migration", "directory with migration files")
