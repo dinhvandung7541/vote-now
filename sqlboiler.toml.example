@@ -1,0 +1,7 @@
+[psql]
+blacklist = ["goose_db_version"]
+dbname = "vote-now"
+user = "postgres"
+pass = "example"
+host = "localhost"
+sslmode = "disable"

@@ -12,10 +12,10 @@ import (
 	"github.com/dinhvandung7541/vote-now/cmd/migrator/config"
 	dbconn "github.com/dinhvandung7541/vote-now/cmd/migrator/db"
 )
-//go build -o bin/migrator ./ext/cmd/migrator
+
 var (
 	flags = flag.NewFlagSet("migrator", flag.ExitOnError)
-	dir   = flags.String("dir", "migration", "directory with migration files")
+	dir   = flags.String("dir", "migrations", "directory with migration files")
 )
 
 func main() {
