@@ -1,22 +1,32 @@
 package main
 
 import (
-    "fmt"
-    "net/http"
-    // "database/sql"
-    // "os"
+	"fmt"
 
-    // _ "github.com/lib/pq"
+	"github.com/joho/godotenv"
+	"github.com/labstack/echo"
 )
 
 func main() {
-    // initDb()
-    // defer db.Close()
-    fmt.Println("hello Docker")
-    http.HandleFunc("/", helloWorld)
-    http.ListenAndServe(":8080", nil)
-}
+	//load env
+	if err := godotenv.Load(); err != nil {
+		panic(err)
+	}
 
-func helloWorld(w http.ResponseWriter, r *http.Request) {
-    fmt.Fprintf(w, "Hello world!")
+	// Setup DB
+	db, closeDB := initDB()
+	defer closeDB()
+
+	if err := db.Ping(); err != nil {
+		fmt.Println("Init DB error")
+	} else {
+		fmt.Println("Hello Docker")
+	}
+
+	// Echo instance
+	e := echo.New()
+	e = routes(e)
+	// Start server
+	e.Logger.Fatal(e.Start(":8080"))
+
 }

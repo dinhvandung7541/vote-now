@@ -22,37 +22,28 @@ import (
 
 // User is an object representing the database table.
 type User struct {
-	ID             int       `boil:"id" json:"id" toml:"id" yaml:"id"`
-	FirstName      string    `boil:"first_name" json:"first_name" toml:"first_name" yaml:"first_name"`
-	LastName       string    `boil:"last_name" json:"last_name" toml:"last_name" yaml:"last_name"`
-	Email          string    `boil:"email" json:"email" toml:"email" yaml:"email"`
-	Phone          string    `boil:"phone" json:"phone" toml:"phone" yaml:"phone"`
-	PasswordDigest string    `boil:"password_digest" json:"password_digest" toml:"password_digest" yaml:"password_digest"`
-	CreatedAt      time.Time `boil:"created_at" json:"created_at" toml:"created_at" yaml:"created_at"`
-	UpdatedAt      time.Time `boil:"updated_at" json:"updated_at" toml:"updated_at" yaml:"updated_at"`
+	ID        int       `boil:"id" json:"id" toml:"id" yaml:"id"`
+	Username  string    `boil:"username" json:"username" toml:"username" yaml:"username"`
+	Password  string    `boil:"password" json:"password" toml:"password" yaml:"password"`
+	CreatedAt time.Time `boil:"created_at" json:"created_at" toml:"created_at" yaml:"created_at"`
+	UpdatedAt time.Time `boil:"updated_at" json:"updated_at" toml:"updated_at" yaml:"updated_at"`
 
 	R *userR `boil:"-" json:"-" toml:"-" yaml:"-"`
 	L userL  `boil:"-" json:"-" toml:"-" yaml:"-"`
 }
 
 var UserColumns = struct {
-	ID             string
-	FirstName      string
-	LastName       string
-	Email          string
-	Phone          string
-	PasswordDigest string
-	CreatedAt      string
-	UpdatedAt      string
+	ID        string
+	Username  string
+	Password  string
+	CreatedAt string
+	UpdatedAt string
 }{
-	ID:             "id",
-	FirstName:      "first_name",
-	LastName:       "last_name",
-	Email:          "email",
-	Phone:          "phone",
-	PasswordDigest: "password_digest",
-	CreatedAt:      "created_at",
-	UpdatedAt:      "updated_at",
+	ID:        "id",
+	Username:  "username",
+	Password:  "password",
+	CreatedAt: "created_at",
+	UpdatedAt: "updated_at",
 }
 
 // UserRels is where relationship names are stored.
@@ -82,8 +73,8 @@ func (*userR) NewStruct() *userR {
 type userL struct{}
 
 var (
-	userColumns               = []string{"id", "first_name", "last_name", "email", "phone", "password_digest", "created_at", "updated_at"}
-	userColumnsWithoutDefault = []string{"first_name", "last_name", "email", "phone", "password_digest"}
+	userColumns               = []string{"id", "username", "password", "created_at", "updated_at"}
+	userColumnsWithoutDefault = []string{"username", "password"}
 	userColumnsWithDefault    = []string{"id", "created_at", "updated_at"}
 	userPrimaryKeyColumns     = []string{"id"}
 )

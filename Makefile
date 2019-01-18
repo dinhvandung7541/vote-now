@@ -4,7 +4,6 @@ local-db: bin
 	eval "docker-compose down"
 	eval "docker-compose up -d"
 
-# build
 cln-bin:
 	rm -rf bin
 bin-migrator:
@@ -25,3 +24,7 @@ local-env: local-db env-file
 # SQL_BOILER
 gen-sqlboiler-model:
 	@sqlboiler --wipe psql
+
+run:
+	go build -o main cmd/vote-now/*
+	./main
