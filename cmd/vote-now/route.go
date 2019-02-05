@@ -1,16 +1,25 @@
 package main
 
 import (
+	"github.com/dinhvandung7541/vote-now/handler"
 	"github.com/labstack/echo"
 	"github.com/labstack/echo/middleware"
-	
 )
 
+// type Template struct {
+// 	templates *template.Template
+// }
+
+// func (t *Template) Render(w io.Writer, name string, data interface{}, c echo.Context) error {
+// 	return t.templates.ExecuteTemplate(w, name, data)
+// }
+
 func routes(e *echo.Echo) *echo.Echo {
+
 	// Middleware
-	e.Use(mw.NewCustomContext(s))
 	e.Use(middleware.Logger())
-	// e.Use(mw.WithJWT())
+	e.Use(middleware.Recover())
+
 	e.Use(middleware.CORSWithConfig(middleware.CORSConfig{
 		AllowOrigins:     []string{"*"},
 		AllowHeaders:     []string{"Accept", "Authorization", "Content-Type", "X-CSRF-Token"},
@@ -21,16 +30,18 @@ func routes(e *echo.Echo) *echo.Echo {
 	// User route
 	user := e.Group("/users")
 	user.POST("/signup", handler.Signup)
-	user.POST("/login", handler.Login)
-	user.POST("/changePassword", handler.ChangePassword)
+	user.POST("/signin", handler.Signin)
+	user.POST("/change_password", handler.ChangePassword)
+
+	e.GET("/list", handler.List)
 
 	//vote
 	vote := e.Group("/votes")
-	vote.GET("/list", handler.List)
+	vote.Use(middleware.JWT([]byte("secret")))
 	vote.POST("/vote", handler.Vote)
 	vote.POST("/unvote", handler.Unvote)
 	vote.POST("/create", handler.CreateQuestion)
-	vote.POST(("/addOption", handler.AddOption))
+	vote.POST("/addOption", handler.AddOption)
 	vote.POST("/removeQuestion", handler.RemoveQuestion)
 	vote.POST("/removeOption", handler.RemoveOption)
 

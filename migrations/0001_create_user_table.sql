@@ -5,7 +5,7 @@ CREATE TABLE "users"
     "id" serial NOT NULL PRIMARY KEY,
     "username" varchar(500) NOT NULL,
     "password" varchar(500) NOT NULL,
-
+    "token" varchar(500),
     "created_at" TIMESTAMPTZ NOT NULL DEFAULT NOW(),
     "updated_at" TIMESTAMPTZ NOT NULL DEFAULT NOW()
 );

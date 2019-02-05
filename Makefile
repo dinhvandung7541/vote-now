@@ -15,7 +15,7 @@ env-file:
 	@if ! [ -e "sqlboiler.toml" ] ; then cat sqlboiler.toml.example > sqlboiler.toml; fi
 	@if ! [ -e ".env" ] ; then cat .env.example > .env ; fi
 
-local-env: local-db env-file
+local-env: env-file local-db 
 	@echo "Waiting for database connection..."
 	@while ! docker exec vote-now_db pg_isready -h localhost -p 5432 > /dev/null; do \
 		sleep 1; \

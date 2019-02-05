@@ -14,6 +14,7 @@ import (
 	"time"
 
 	"github.com/pkg/errors"
+	"github.com/volatiletech/null"
 	"github.com/volatiletech/sqlboiler/boil"
 	"github.com/volatiletech/sqlboiler/queries"
 	"github.com/volatiletech/sqlboiler/queries/qm"
@@ -22,11 +23,12 @@ import (
 
 // User is an object representing the database table.
 type User struct {
-	ID        int       `boil:"id" json:"id" toml:"id" yaml:"id"`
-	Username  string    `boil:"username" json:"username" toml:"username" yaml:"username"`
-	Password  string    `boil:"password" json:"password" toml:"password" yaml:"password"`
-	CreatedAt time.Time `boil:"created_at" json:"created_at" toml:"created_at" yaml:"created_at"`
-	UpdatedAt time.Time `boil:"updated_at" json:"updated_at" toml:"updated_at" yaml:"updated_at"`
+	ID        int         `boil:"id" json:"id" toml:"id" yaml:"id"`
+	Username  string      `boil:"username" json:"username" toml:"username" yaml:"username"`
+	Password  string      `boil:"password" json:"password" toml:"password" yaml:"password"`
+	Token     null.String `boil:"token" json:"token,omitempty" toml:"token" yaml:"token,omitempty"`
+	CreatedAt time.Time   `boil:"created_at" json:"created_at" toml:"created_at" yaml:"created_at"`
+	UpdatedAt time.Time   `boil:"updated_at" json:"updated_at" toml:"updated_at" yaml:"updated_at"`
 
 	R *userR `boil:"-" json:"-" toml:"-" yaml:"-"`
 	L userL  `boil:"-" json:"-" toml:"-" yaml:"-"`
@@ -36,12 +38,14 @@ var UserColumns = struct {
 	ID        string
 	Username  string
 	Password  string
+	Token     string
 	CreatedAt string
 	UpdatedAt string
 }{
 	ID:        "id",
 	Username:  "username",
 	Password:  "password",
+	Token:     "token",
 	CreatedAt: "created_at",
 	UpdatedAt: "updated_at",
 }
@@ -73,8 +77,8 @@ func (*userR) NewStruct() *userR {
 type userL struct{}
 
 var (
-	userColumns               = []string{"id", "username", "password", "created_at", "updated_at"}
-	userColumnsWithoutDefault = []string{"username", "password"}
+	userColumns               = []string{"id", "username", "password", "token", "created_at", "updated_at"}
+	userColumnsWithoutDefault = []string{"username", "password", "token"}
 	userColumnsWithDefault    = []string{"id", "created_at", "updated_at"}
 	userPrimaryKeyColumns     = []string{"id"}
 )
