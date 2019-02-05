@@ -1,7 +1,9 @@
 package main
 
 import (
-	"github.com/dinhvandung7541/vote-now/handler"
+	// "github.com/dinhvandung7541/vote-now/handler"
+	"tutorial/vote-now/handler"
+
 	"github.com/labstack/echo"
 	"github.com/labstack/echo/middleware"
 )

@@ -10,8 +10,10 @@ import (
 	jwt "github.com/dgrijalva/jwt-go"
 	"github.com/volatiletech/sqlboiler/boil"
 
-	"github.com/dinhvandung7541/vote-now/db"
-	"github.com/dinhvandung7541/vote-now/models"
+	"tutorial/vote-now/db"
+	"tutorial/vote-now/models"
+
+	// "github.com/dinhvandung7541/vote-now/models"
 	"github.com/labstack/echo"
 	"github.com/volatiletech/sqlboiler/queries/qm"
 )

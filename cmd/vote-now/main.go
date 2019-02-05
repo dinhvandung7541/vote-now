@@ -2,8 +2,9 @@ package main
 
 import (
 	"fmt"
+	"tutorial/vote-now/db"
 
-	"github.com/dinhvandung7541/vote-now/db"
+	// "github.com/dinhvandung7541/vote-now/db"
 	"github.com/joho/godotenv"
 	"github.com/labstack/echo"
 )
